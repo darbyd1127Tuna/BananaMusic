@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banana Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ AUTH ============ -->
+<div id="auth-root" class="auth-root active">
+
+  <section id="screen-start" class="auth-screen active">
+    <div class="auth-card start-card">
+      <div class="brand-mark"><span class="ico xl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span></div>
+      <h1 class="brand-name">Banana Music</h1>
+      <p class="tagline">Your music. Your taste. Your people.</p>
+      <div class="auth-buttons">
+        <button class="btn-yellow full" onclick="showAuthScreen('login')">Log In</button>
+        <button class="btn-outline full" onclick="showAuthScreen('signup')">Create Account</button>
+      </div>
+      <button class="link-btn" onclick="showAuthScreen('forgot')">Forgot Password?</button>
+    </div>
+  </section>
+
+  <section id="screen-login" class="auth-screen">
+    <div class="auth-card">
+      <button class="back-btn" onclick="showAuthScreen('start')" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="brand-mark sm"><span class="ico lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span></div>
+      <h2 class="auth-title">Welcome back</h2>
+      <p class="auth-sub">Demo account: demo@banana.fm / demo1234</p>
+      <form id="form-login" novalidate>
+        <label>Email<input type="email" id="login-email" placeholder="you@email.com"></label>
+        <label>Password<input type="password" id="login-password" placeholder="••••••••"></label>
+        <p class="form-error" id="login-error"></p>
+        <button type="submit" class="btn-yellow full">Log In</button>
+      </form>
+      <button class="btn-outline full" onclick="showAuthScreen('signup')">Create Account</button>
+      <button class="link-btn" onclick="showAuthScreen('forgot')">Forgot Password?</button>
+    </div>
+  </section>
+
+  <section id="screen-signup" class="auth-screen">
+    <div class="auth-card">
+      <button class="back-btn" onclick="showAuthScreen('start')" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="brand-mark sm"><span class="ico lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span></div>
+      <h2 class="auth-title">Create your account</h2>
+      <p class="auth-sub">Start building your taste in music.</p>
+      <form id="form-signup" novalidate>
+        <label>Username<input type="text" id="signup-username" placeholder="yourname"></label>
+        <label>Email<input type="email" id="signup-email" placeholder="you@email.com"></label>
+        <label>Password<input type="password" id="signup-password" placeholder="••••••••"></label>
+        <label>Confirm Password<input type="password" id="signup-confirm" placeholder="••••••••"></label>
+        <p class="form-error" id="signup-error"></p>
+        <button type="submit" class="btn-yellow full">Create Account</button>
+      </form>
+      <button class="link-btn" onclick="showAuthScreen('login')">Already have an account? Log in</button>
+    </div>
+  </section>
+
+  <section id="screen-forgot" class="auth-screen">
+    <div class="auth-card">
+      <button class="back-btn" onclick="showAuthScreen('login')" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="brand-mark sm"><span class="ico lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span></div>
+      <h2 class="auth-title">Reset your password</h2>
+      <p class="auth-sub">Enter your email and we'll send a reset link.</p>
+      <form onsubmit="event.preventDefault(); toast('If that email exists, a reset link is on its way.'); showAuthScreen('login');">
+        <label>Email<input type="email" placeholder="you@email.com"></label>
+        <button type="submit" class="btn-yellow full">Send Reset Link</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="app-root" class="app-root">
+
+  <!-- Desktop sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-brand"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span> <span>Banana Music</span></div>
+      <nav class="sidebar-nav">
+        <button class="nav-item" data-page="home" aria-label="Home"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5L12 4l8 7.5"/><path d="M6 10v10h12V10"/></svg></span> <span>Home</span></button>
+        <button class="nav-item" data-page="search" aria-label="Search"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span> <span>Search</span></button>
+        <button class="nav-item" data-page="library" aria-label="Library"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="10" width="4" height="10" rx="1"/></svg></span> <span>Library</span></button>
+        <button class="nav-item" data-page="profile" aria-label="Profile"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span> <span>Profile</span></button>
+      </nav>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Your Playlists</span>
+        <div class="sidebar-playlists" id="sidebar-playlists"></div>
+      </div>
+    </div>
+    <div class="sidebar-bottom">
+      <button class="nav-item" id="open-settings-sidebar" onclick="openModal('modal-settings')" aria-label="Settings"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V19a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H4a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H10a1.7 1.7 0 0 0 1-1.5V4a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V10a1.7 1.7 0 0 0 1.5 1H20a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span> <span>Settings</span></button>
+      <button class="nav-item" data-logout aria-label="Log out"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></span> <span>Log Out</span></button>
+    </div>
+  </aside>
+
+  <!-- Top bar (mobile + desktop notif bell) -->
+  <header class="topbar">
+    <div class="topbar-brand"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span> Banana Music</div>
+    <button class="icon-btn" id="notif-bell" aria-label="Notifications"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><span class="notif-badge" id="notif-count">0</span></button>
+  </header>
+
+  <main id="main-scroll" class="main-scroll"></main>
+
+  <!-- Player bar -->
+  <div id="player-bar" class="player-bar"></div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="bottom-nav">
+    <button class="nav-item" data-page="home" aria-label="Home"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5L12 4l8 7.5"/><path d="M6 10v10h12V10"/></svg></span><span>Home</span></button>
+    <button class="nav-item" data-page="search" aria-label="Search"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span><span>Search</span></button>
+    <button class="nav-item" onclick="mobileCreate()" aria-label="Create post"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span><span>Create</span></button>
+    <button class="nav-item" data-page="library" aria-label="Library"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="17" y="10" width="4" height="10" rx="1"/></svg></span><span>Library</span></button>
+    <button class="nav-item" data-page="profile" aria-label="Profile"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span><span>Profile</span></button>
+  </nav>
+
+  <!-- Notification panel -->
+  <div id="notif-panel" class="notif-panel"></div>
+
+  <!-- Expanded player -->
+  <div id="expanded-player" class="expanded-player"></div>
+
+  <!-- Queue panel -->
+  <div id="queue-panel" class="queue-panel"></div>
+
+  <!-- Modal backdrop -->
+  <div id="modal-backdrop" class="modal-backdrop"></div>
+
+  <!-- New playlist modal -->
+  <div id="modal-playlist" class="modal">
+    <div class="modal-head"><h3>New Playlist</h3><button data-close-modal aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <form id="form-playlist">
+      <label>Playlist name<input type="text" id="pl-name" placeholder="Late Night Drives"></label>
+      <label>Description<textarea id="pl-desc" rows="2" placeholder="What's this playlist for?"></textarea></label>
+      <label class="checkbox-row"><input type="checkbox" id="pl-public" checked> Make this playlist public</label>
+      <button type="submit" class="btn-yellow full">Create Playlist</button>
+    </form>
+  </div>
+
+  <!-- Share modal -->
+  <div id="modal-share" class="modal">
+    <div class="modal-head"><h3 id="share-modal-title">Share</h3><button data-close-modal aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="share-options">
+      <button class="share-opt" id="copy-link-btn"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.5 14.5l5-5"/><path d="M13 6l1.5-1.5a3.5 3.5 0 0 1 5 5L18 11"/><path d="M11 18l-1.5 1.5a3.5 3.5 0 0 1-5-5L6 13"/></svg></span> Copy link</button>
+      <button class="share-opt" onclick="closeModals(); toast('Shared to your Banana Music feed.')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 20c6.5 1 12-3 13.5-9.5"/><path d="M19.5 10.5c.8-.3 1.6 0 2 .7-.9 2-2.7 3.4-4.8 3.6"/><path d="M6 20c-1.2-1.6-1.6-3.4-1-5"/></svg></span> Share to Banana Music</button>
+      <button class="share-opt" onclick="closeModals(); toast('Opened friend picker.')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 8.2a3 3 0 1 1 .3 6"/><path d="M21.5 20c0-3-2-5.2-4.8-5.8"/></svg></span> Share to friends</button>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div id="modal-settings" class="modal">
+    <div class="modal-head"><h3>Settings</h3><button data-close-modal aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="settings-list">
+      <div class="settings-row"><span>Account</span><span class="dim">demo@banana.fm</span></div>
+      <div class="settings-row"><span>Private playlists</span><span class="dim">On</span></div>
+      <div class="settings-row"><span>Notifications</span><span class="dim">On</span></div>
+      <button class="btn-outline full" data-logout>Log Out</button>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast-host" class="toast-host"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
