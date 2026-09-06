@@ -1,8 +1,4 @@
-/* ============================================================
-   BANANA MUSIC — STYLES
-   Palette: near-black forest bg, deep green surfaces, banana
-   yellow accent, off-white text. Flat color only — no gradients.
-   ============================================================ */
+
 
 :root {
   --bg: #0E1712;
@@ -407,3 +403,4 @@ body.has-player .main-scroll { padding-bottom: calc(var(--player-h) + 32px); }
   .mcard, .mcard-art { width: 128px; height: 128px; }
   .auth-card { padding: 32px 22px; }
 }
+/* Dark mode feature */
